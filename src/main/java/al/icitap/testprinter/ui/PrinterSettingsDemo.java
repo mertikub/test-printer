@@ -6,6 +6,7 @@ import java.util.Map;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.TextArea;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 import al.icitap.testprinter.DiscoveredPrinterForDevDemo;
@@ -29,6 +30,7 @@ public class PrinterSettingsDemo extends PrinterDemoBase {
 		VerticalLayout mainPane = new  VerticalLayout();
 		mainPane.addComponent(createHeader("Printer Settings"));
 		mainPane.addComponent(createSelectPrinterPanel());
+		mainPane.addComponent(createLowerPanel());
 		
 		contentContainer.removeAllComponents();
 		contentContainer.addComponent(mainPane);
@@ -44,18 +46,18 @@ public class PrinterSettingsDemo extends PrinterDemoBase {
 		tabbed.addTab(printSettingsTab, "Print");
 		
 		actionButton = new Button("Refresh");
-		actionButton.setEnabled(false);
 		actionButton.addClickListener(e -> {
-			new Thread(new Runnable() {				
-				@Override
-				public void run() {
-					DiscoveredPrinterForDevDemo printer = addressDropdown.getValue();
-					Map<SettingsGroup, Object[][]> printerSettingsDataMap = new PrinterSettingsModel().getPrinterSettings(printer);
-					updatePrinterSettings(printerSettingsDataMap);
-					actionButton.setEnabled(true);
-				}
+			actionButton.setEnabled(false);
+			
+			UI.getCurrent().access(() -> {
+				DiscoveredPrinterForDevDemo printer = addressDropdown.getValue();
+				Map<SettingsGroup, Object[][]> printerSettingsDataMap = new PrinterSettingsModel().getPrinterSettings(printer);
+				updatePrinterSettings(printerSettingsDataMap);
+				actionButton.setEnabled(true);
 			});
 		});
+		
+		printSettingsTab.addComponent(actionButton);
 		
 		return tabbed;		
 	}
