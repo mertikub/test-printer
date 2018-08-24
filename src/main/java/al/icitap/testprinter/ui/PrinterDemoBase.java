@@ -31,7 +31,7 @@ public class PrinterDemoBase {
 	}
 	
 	protected ComboBox<String> connectionTypeCombobox;
-	protected ComboBox<DiscoveredPrinterForDevDemo> addressDropdown;
+	protected static ComboBox<DiscoveredPrinterForDevDemo> addressDropdown;
 	protected Button discoveryButton;
 	
 	protected Label createHeader(String demoTitle) {
@@ -54,6 +54,7 @@ public class PrinterDemoBase {
 	
 	private CssLayout createConnectionArea() {
 		CssLayout connectionArea = new CssLayout();
+		connectionArea.setWidth("30%");
 		
 		connectionTypeCombobox = new  ComboBox<String>("Connection");
 		connectionTypeCombobox.setItems(PrinterModel.NETWORK_SELECTION, PrinterModel.USB_SELECTION);
@@ -68,31 +69,25 @@ public class PrinterDemoBase {
 	}
 	
 	private CssLayout createPrinterAddressArea() {
-		CssLayout addressArea = new CssLayout();
-		
-		HorizontalLayout hl = new HorizontalLayout();
+		CssLayout addressArea = new CssLayout();		
+		addressArea.setWidth("70%");
 		
 		addressDropdown = new ComboBox<DiscoveredPrinterForDevDemo>("Printer");
 		addressDropdown.setWidth("300px");
 		addressDropdown.setItems(new DiscoveredPrinterForDevDemo(createPrototypeForCombobox()));
-		hl.addComponent(addressDropdown);
+		addressArea.addComponent(addressDropdown);
 		
 		discoveryButton = new Button();
 		discoveryButton.setIcon(VaadinIcons.REFRESH);
-		hl.addComponent(discoveryButton);
+		addressArea.addComponent(discoveryButton);
+		
+		
 		
 		discoveryButton.addClickListener(e -> {
-			new Thread(new Runnable() {
-
-				@Override
-				public void run() {
-					discoveryButton.setEnabled(false);
-					discoverPrinters();					
-				}				
-			});
+			discoveryButton.setEnabled(false);
+			discoverPrinters();	
 		});
 		
-		addressArea.addComponent(hl);
 		
 		return addressArea;
 	}
@@ -104,9 +99,13 @@ public class PrinterDemoBase {
 			
 			@Override
 			public void foundPrinter(DiscoveredPrinter printer) {
-				if(printer.getDiscoveryDataMap().get("MODEL").contains("ZXP")) {
+
+				String model = printer.getDiscoveryDataMap().get("MODEL");
+				
+				if(model.contains("ZXP")) {
 					discoveredPrinters.add(new DiscoveredPrinterForDevDemo(printer));
-				}				
+				}	
+				
 			}
 			
 			@Override

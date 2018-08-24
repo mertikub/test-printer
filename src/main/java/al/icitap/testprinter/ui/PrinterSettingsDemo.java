@@ -29,6 +29,8 @@ public class PrinterSettingsDemo extends PrinterDemoBase {
 		VerticalLayout mainPane = new  VerticalLayout();
 		mainPane.addComponent(createHeader("Printer Settings"));
 		mainPane.addComponent(createSelectPrinterPanel());
+		mainPane.addComponent(createLowerPanel());
+		
 		
 		contentContainer.removeAllComponents();
 		contentContainer.addComponent(mainPane);
