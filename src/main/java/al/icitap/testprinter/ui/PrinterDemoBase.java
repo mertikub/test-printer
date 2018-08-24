@@ -10,7 +10,6 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
@@ -33,8 +32,10 @@ public class PrinterDemoBase {
 	}
 	
 	protected ComboBox<String> connectionTypeCombobox;
-	protected static ComboBox<DiscoveredPrinterForDevDemo> addressDropdown;
+	protected ComboBox<DiscoveredPrinterForDevDemo> addressDropdown;
 	protected Button discoveryButton;
+	
+	private UI ui = UI.getCurrent();
 	
 	protected Label createHeader(String demoTitle) {
 		Label label = new Label(demoTitle, ContentMode.HTML);
@@ -77,6 +78,8 @@ public class PrinterDemoBase {
 		addressDropdown = new ComboBox<DiscoveredPrinterForDevDemo>("Printer");
 		addressDropdown.setWidth("300px");
 		addressDropdown.setItems(new DiscoveredPrinterForDevDemo(createPrototypeForCombobox()));
+		addressDropdown.setEmptySelectionAllowed(false);
+		addressDropdown.setTextInputAllowed(false);
 		addressArea.addComponent(addressDropdown);
 		
 		discoveryButton = new Button();
@@ -114,8 +117,9 @@ public class PrinterDemoBase {
 			
 			@Override
 			public void discoveryFinished() {
-				addressDropdown.setItems(discoveredPrinters);
-				
+				ui.access(() -> {
+					addressDropdown.setItems(discoveredPrinters);
+				});				
 			}
 			
 			@Override
@@ -138,6 +142,7 @@ public class PrinterDemoBase {
 		} finally {
 			discoveryButton.setEnabled(true);
 		}
+		
 		
 	}
 
