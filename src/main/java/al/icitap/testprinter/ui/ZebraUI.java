@@ -2,6 +2,7 @@ package al.icitap.testprinter.ui;
 
 import com.vaadin.annotations.Push;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinService;
 import com.vaadin.shared.ui.ui.Transport;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.Button;
@@ -20,6 +21,7 @@ public class ZebraUI extends UI {
 		
 		PrinterSettingsDemo settingsDemo = new PrinterSettingsDemo();
 		settingsDemo.createContent(layout);
+		
 		
 	}
 	

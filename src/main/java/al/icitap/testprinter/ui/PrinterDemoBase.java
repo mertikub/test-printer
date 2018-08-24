@@ -15,6 +15,8 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.zebra.sdk.common.card.printer.discovery.NetworkCardDiscoverer;
 import com.zebra.sdk.printer.discovery.DiscoveredPrinter;
@@ -42,7 +44,7 @@ public class PrinterDemoBase {
 	
 	protected Panel createSelectPrinterPanel() {
 		Panel selectedPrinterPanel = new Panel();
-		HorizontalLayout panelLayout = new HorizontalLayout();
+		VerticalLayout panelLayout = new VerticalLayout();
 		panelLayout.setMargin(true);
 		selectedPrinterPanel.setContent(panelLayout);
 		
@@ -85,7 +87,9 @@ public class PrinterDemoBase {
 		
 		discoveryButton.addClickListener(e -> {
 			discoveryButton.setEnabled(false);
-			discoverPrinters();	
+			UI.getCurrent().access(() -> {
+				discoverPrinters();
+			});
 		});
 		
 		
