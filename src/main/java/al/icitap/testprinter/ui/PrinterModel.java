@@ -24,6 +24,8 @@ import com.zebra.sdk.common.card.errors.ZebraCardErrors;
 import com.zebra.sdk.common.card.exceptions.ZebraCardException;
 import com.zebra.sdk.common.card.printer.ZebraCardPrinter;
 
+import al.icitap.testprinter.ui.util.PrinterLog;
+
 public class PrinterModel {
 
 	public Connection connection = null;
@@ -36,7 +38,7 @@ public class PrinterModel {
 		super();
 	}
 
-	protected void pollJobStatus(ZebraCardPrinter zebraCardPrinter, int jobId, TextArea jobStatusArea) throws ConnectionException, ZebraCardException {
+	protected void pollJobStatus(ZebraCardPrinter zebraCardPrinter, int jobId, PrinterLog jobStatusArea) throws ConnectionException, ZebraCardException {
 		boolean done = false;
 		long start = System.currentTimeMillis();
 		

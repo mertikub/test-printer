@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template name="Template" card_type="2" card_thickness="30"
+	delete="no">
+	<fonts>
+		<font id="1" name="arial" size="12" bold="no" italic="no"
+			underline="no" />
+		<font id="2" name="arial" size="14" bold="yes" italic="no"
+			underline="no" />
+	</fonts>
+	<sides>
+		<side name="front" orientation="portrait" rotation="0">
+			<print_types>
+				<print_type type="color">
+					<graphic order_id="1" format="bmp" width="638" height="1012" x="0" y="0"
+						delete="false">Front</graphic>	
+					<graphic order_id="2" field="imageLogo" format="bmp" width="280" height="100"
+						x="710" y="40" delete="false" />
+					<text order_id="3" field="name" font_id="1" width="0" height="0" x="50"
+						y="300" angle="0" color="0x000000" alignment="left" />
+					<text order_id="4" field="surname" font_id="1" width="0" height="0" x="50"
+						y="350" angle="0" color="0x000000" alignment="left" />
+					<text order_id="5" field="birthdate" font_id="1" width="0" height="0" x="50"
+						y="400" angle="0" color="0x000000" alignment="left" />
+					<text order_id="6" field="employeeId" font_id="2" width="0" height="0" x="50" y="450"
+						angle="0" color="0x000000" alignment="left" />
+					<barcode order_id="2" field="qrCode" x="0" y="500" rotation="0" code="qrcode"
+						multiplier="2">www.zebra.com</barcode>				
+				</print_type>
+				<print_type type="mono">
+					<graphic field="imageLogo" format="bmp" width="280" height="100"
+						x="710" y="40" delete="false" />
+					<text field="name" font_id="1" width="0" height="0" x="50"
+						y="300" angle="0" color="0x000000" alignment="left" />
+					<text field="surname" font_id="1" width="0" height="0" x="50"
+						y="350" angle="0" color="0x000000" alignment="left" />
+					<text field="birthdate" font_id="1" width="0" height="0" x="50"
+						y="400" angle="0" color="0x000000" alignment="left" />
+					<text field="employeeId" font_id="2" width="0" height="0" x="50" y="450"
+						angle="0" color="0x000000" alignment="left" />
+					<barcode field="qrCode" x="0" y="500" rotation="0" code="qrcode"
+						multiplier="2">www.zebra.com</barcode>
+				</print_type>
+				<print_type type="overlay">
+					<graphic format="bmp" width="1024" height="648"></graphic>
+				</print_type>
+			</print_types>
+		</side>
+		<side name="back" orientation="portrait">
+			<print_types>
+				<print_type type="mono">
+					<graphic format="bmp" width="638" height="1012" x="0" y="0"
+						delete="false">Front</graphic>
+				</print_type>
+			</print_types>
+		</side>
+	</sides>
+</template>

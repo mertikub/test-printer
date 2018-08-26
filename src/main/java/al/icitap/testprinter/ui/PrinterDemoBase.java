@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
@@ -24,6 +25,7 @@ import com.zebra.sdk.printer.discovery.DiscoveryHandler;
 import com.zebra.sdk.printer.discovery.UsbDiscoverer;
 
 import al.icitap.testprinter.DiscoveredPrinterForDevDemo;
+import al.icitap.testprinter.ui.util.PrinterLog;
 
 public class PrinterDemoBase {
 	
@@ -36,6 +38,7 @@ public class PrinterDemoBase {
 	protected Button discoveryButton;
 	
 	private UI ui = UI.getCurrent();
+	protected PrinterLog printerLog;
 	
 	protected Label createHeader(String demoTitle) {
 		Label label = new Label(demoTitle, ContentMode.HTML);
@@ -97,6 +100,12 @@ public class PrinterDemoBase {
 		
 		
 		return addressArea;
+	}
+	
+	public Label createPrinterLog(int width) {
+		printerLog = new PrinterLog();
+		printerLog.setWidth(width, Unit.PIXELS);
+		return printerLog;
 	}
 	
 	private void discoverPrinters() {

@@ -16,8 +16,6 @@ public class PrinterSettingsDemo extends PrinterDemoBase {
 	
 	private final Map<SettingsGroup, TextArea> settingsComponents = new HashMap<>();
 
-	private VerticalLayout contentContainer;
-
 	private Button actionButton;
 
 	public PrinterSettingsDemo() {
@@ -25,7 +23,6 @@ public class PrinterSettingsDemo extends PrinterDemoBase {
 	}
 	
 	public void createContent(VerticalLayout contentContainer) {
-		this.contentContainer = contentContainer;
 		
 		VerticalLayout mainPane = new  VerticalLayout();
 		mainPane.addComponent(createHeader("Printer Settings"));
